@@ -356,41 +356,7 @@ namespace ProjektPP1
             lista.Insert(nrzapytania, odpowiedz);
 
         }
-        public void Tworz()
-        {
-            
-            try
-            {
-                ISchedulerFactory schedulerFactory = new StdSchedulerFactory();
-                IScheduler scheduler = schedulerFactory.GetScheduler();
-                scheduler.Start();
-                iledokonca = 60;
-                Zmiana();
-                IJobDetail job = JobBuilder.Create<OneJob>()
-                    .WithIdentity("name", "group")
-                    .Build();
-                ITrigger trigger = TriggerBuilder.Create()
-                    .WithIdentity("trigger1", "group")
-                    .StartNow()
-                    .WithCronSchedule("0/10 0 0 ? * * *")
-
-                    .Build();
-
-                scheduler.ScheduleJob(job, trigger);
-                scheduler.Shutdown();
-                
-
-
-                
-            }
-            catch(SchedulerException se)
-            {
-                MessageBox.Show(se.ToString());
-            }
-
-
-
-        }
+      
       
 
     }
@@ -464,23 +430,6 @@ namespace ProjektPP1
         }
     }
     
-    public class OneJob : IJob
-        {
-       public OneJob()
-        {
-
-        }
-            DateTime dat = DateTime.Now;
-            int godziny = 60;
-            public void Execute(IJobExecutionContext context)
-            {
-                godziny = godziny - dat.Minute;
-                MessageBox.Show("Wciśnij esc aby wyjść " + "\n" + godziny.ToString());
-                
-
-
-
-        }
-        }
+ 
 
     }
